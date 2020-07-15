@@ -1,0 +1,8 @@
+{
+  "name": "auth-with-passport",
+  "version": "1.0.0",
+  "description": "Learn auth api with passport",
+  "main": "app.js",
+  "author": "sheenazien8",
+  "license": "MIT"
+}
