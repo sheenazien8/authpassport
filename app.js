@@ -3,6 +3,7 @@ const app = express()
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const router = require('./routes')
 require('dotenv').config()
 
 //For BodyParser
@@ -15,9 +16,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', function (req, res) {
-    res.send('Welcome to Passport with Sequelize')
+    res.json({
+        success: true,
+        date: new Date()
+    })
 });
 
+router.init(app)
 
 app.listen(5000, function (err) {
     if (!err)
