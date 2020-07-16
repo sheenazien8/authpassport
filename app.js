@@ -16,16 +16,18 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.get('/', function (req, res) {
-    res.json({
-        success: true,
-        date: new Date()
-    })
+  res.json({
+    success: true,
+    date: new Date()
+  })
 });
 
 router.init(app)
 
 app.listen(5000, function (err) {
-    if (!err)
-        console.log("Site is live in port 5000")
-    else console.log(err)
+  if (!err)
+    console.log("Site is live in port 5000")
+  else console.log(err)
 });
+
+module.exports = app
