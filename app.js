@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const passport = require('./passport/setup')
-const localStrategy = require('passport-local')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const router = require('./routes')

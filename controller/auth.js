@@ -1,4 +1,5 @@
 const passport = require('passport')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
   login: async function (req, res, next) {
@@ -19,16 +20,24 @@ module.exports = {
 
         return res.status(response.status).json(response)
       }
-      req.logIn(user, function (err) {
+      req.logIn(user, info, function (err) {
         if (err) {
           response.status = 500
           response.message = err
 
           return res.status(response.status).json(response)
         }
-        response.status = 200
+        const payload = {
+          id: user.id,
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
+        const token = jwt.sign(payload, process.env.JWT_SCREET)
+        response.status = info.status
         response.success = true
-        response.message = 'YAY!! youre now logged in'
+        response.message = info.message
+        response.token = token
 
         return res.status(response.status).json(response)
       })

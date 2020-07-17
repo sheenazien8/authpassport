@@ -35,7 +35,7 @@ passport.use(
             if (err) throw err;
 
             if (match) {
-              return done(null, user);
+              return done(null, user, {message: 'YAY!! youre now logged in', status: 200});
             } else {
               return done(null, false, {
                 message: "Wrong Password",
