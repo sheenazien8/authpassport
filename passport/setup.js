@@ -8,9 +8,17 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user)
+  User.findOne({
+    where: {
+      id: id
+    }
   })
+    .then((user) => {
+      done(false, user)
+    })
+    .catch((err) => {
+      done(err, false)
+    })
 })
 
 passport.use(

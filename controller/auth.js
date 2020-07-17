@@ -2,7 +2,7 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken')
 
 module.exports = {
-  login: async function (req, res, next) {
+  login: function (req, res) {
     let response = {
       success: false,
       status: 500,
@@ -41,10 +41,10 @@ module.exports = {
 
         return res.status(response.status).json(response)
       })
-    })(req, res, next)
+    })(req, res)
   },
 
-  me: function (req, res, next) {
+  me: function (req, res) {
     const {email, firstName, lastName} = req.user
     const user = {
       email: email,
