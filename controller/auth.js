@@ -42,5 +42,20 @@ module.exports = {
         return res.status(response.status).json(response)
       })
     })(req, res, next)
+  },
+
+  me: function (req, res, next) {
+    const {email, firstName, lastName} = req.user
+    const user = {
+      email: email,
+      firstName: firstName,
+      lastName: lastName
+    }
+    let response = {
+      payload: user,
+      success: true
+    }
+
+    return res.status(200).json(response);
   }
 }

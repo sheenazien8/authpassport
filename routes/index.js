@@ -1,4 +1,5 @@
 const AuthController = require('./../controller/auth')
+const passport = require('./../middleware/auth');
 
 const init = (server) => {
   server.get('*', (req, res, next) => {
@@ -13,6 +14,8 @@ const init = (server) => {
   })
 
   server.post('/login', AuthController.login)
+
+  server.get('/me', passport.authenticate('jwt', {session: false}), AuthController.me)
 }
 
 module.exports = {init}

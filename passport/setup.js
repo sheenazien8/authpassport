@@ -21,7 +21,6 @@ passport.use(
       }
     })
       .then((user) => {
-        console.log(email);
         if (!user) {
           return done(null, false, {
             message: "User Not Found",

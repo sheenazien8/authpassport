@@ -6,6 +6,7 @@ const {expect} = chai;
 chai.use(chaiHttp);
 
 chai.should(); describe("auth test", () => {
+  let token;
   describe("GET /", () => {
     // Test to get all students record
     it("should get status server is 200", (done) => {
@@ -43,6 +44,7 @@ chai.should(); describe("auth test", () => {
           password: '12345678'
         })
         .end((err, res) => {
+          token = res.body.token
           expect(res).to.have.status(200)
           expect(res.body.success).to.equals(true)
           done()
@@ -63,5 +65,28 @@ chai.should(); describe("auth test", () => {
           done()
         })
     });
+
+    it('test user is cant go to /me if didnot use token', (done) => {
+      chai
+        .request(app)
+        .get('/me')
+        .end((err, res) => {
+          expect(res).to.have.status(401)
+          done()
+        })
+    });
+
+    it('test user is logged in', (done) => {
+      chai
+        .request(app)
+        .get('/me')
+        .auth(token, {type: 'bearer'})
+        .end((err, res) => {
+          expect(res).to.have.status(200)
+          expect(res.body.success).to.equals(true)
+          done()
+        })
+    });
+
   });
 });
