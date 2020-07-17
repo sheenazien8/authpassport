@@ -4,8 +4,10 @@ const passport = require('./passport/setup')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const router = require('./routes')
+const cors = require('cors')
 require('dotenv').config()
 
+app.use(cors())
 //For BodyParser
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
